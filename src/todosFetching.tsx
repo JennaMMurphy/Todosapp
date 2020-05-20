@@ -1,15 +1,15 @@
-//@ts-nocheck
 import React, { useState, useEffect } from "react";
 import TodosDisplayed from "./todosDisplayed";
 import SubmitButton from "./button";
 import TextInput from "./textinput";
+import "./App.css";
 
 function TodosFetching() {
   const [todosList, setTodosList] = useState<Array<{ id: number }>>([]);
   const [loading, setLoading] = useState<Boolean>(false);
-  const [inputValue, setInputValue] = useState();
+  const [inputValue, setInputValue] = useState<String>();
 
-  //useEffect fecthes and displayed all todo items on api
+  //useEffect fetches all todo items on api and sets state of todosList on loading
   useEffect(() => {
     setLoading(true);
     fetch("https://todos-nodejs-list.herokuapp.com/api/todos")
@@ -33,8 +33,9 @@ function TodosFetching() {
   };
 
   //changes state to a value entered into textbox
-  const addValueTodoItem = (e) => {
-    setInputValue(e.target.value);
+  const addValueTodoItem = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let targetInput = e.target.value;
+    setInputValue(targetInput);
   };
   //once sumbit button is clicked, this sends to API the value and returns back updated value
   const updateTodoList = async () => {
@@ -61,18 +62,20 @@ function TodosFetching() {
   };
 
   return (
-    <>
-      <TextInput addValueTodoItem={(e) => addValueTodoItem(e)} />
-      <SubmitButton updateTodoList={updateTodoList}>Submit</SubmitButton>
-
+    <div className="container">
+      <div className="App ">
+        <TextInput sty addValueTodoItem={addValueTodoItem} />
+        <SubmitButton updateTodoList={updateTodoList}>Submit</SubmitButton>
+      </div>
       {todosList.map((todos) => (
         <TodosDisplayed
+          className="stylingInputs"
           key={todos.id}
           deleteTodoitem={deleteTodoitem}
           todos={todos}
         />
       ))}
-    </>
+    </div>
   );
 }
 

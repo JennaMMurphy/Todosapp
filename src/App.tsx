@@ -4,11 +4,14 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <TodosFetching />
+    <span className="appBackground">
+      <header>
+        <div className="overlay">
+          <h2>Todo </h2>
+        </div>
       </header>
-    </div>
+      <TodosFetching />
+    </span>
   );
 }
 

@@ -2,11 +2,12 @@ import React from "react";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 function TodosDisplayed({ todos, deleteTodoitem }: any) {
   return (
-    <div>
+    <div >
       <h1 id={todos.id}>
-        {todos.name}
+        {' '}{todos.name}{' '}
         <CheckCircleOutlineIcon
           fontSize="large"
+          style={{ color: 'lightgreen' }}
           onClick={() => deleteTodoitem(todos.id)}
         />
       </h1>
